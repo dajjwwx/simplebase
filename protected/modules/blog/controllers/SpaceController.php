@@ -63,8 +63,6 @@ class SpaceController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$this->layout = '//layouts/blog_editor';
-
 		$model=new Blog;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -111,8 +109,6 @@ class SpaceController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$this->layout = '//layouts/blog_editor';
-		
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed

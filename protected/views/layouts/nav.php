@@ -30,9 +30,6 @@
               <?php endif;?>
             <?php endforeach;?>
             <?php endif;?>
-            <?php if(!Yii::app()->user->isGuest):?>
-                <li><a href="<?php echo $this->createUrl('/space/index',array('id'=>Yii::app()->user->id));?>">My Space</a></li>
-            <?php endif;?>
 
 
           </ul>          

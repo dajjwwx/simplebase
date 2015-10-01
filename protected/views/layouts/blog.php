@@ -5,17 +5,11 @@
 	<div class="row-fluid">
 		<div class="col-md-8">
 					<?php if(isset($this->breadcrumbs)):?>
-						<?php 
-						// $this->widget('application.components.BootBreadcrumbs', array(
-						// 	'links'=>$this->breadcrumbs,
-						// 	'homeLink'=>'<li>'.CHtml::link(Yii::t('zii','Home'),'/').'</li>'
-						// )); 
-						?><!-- breadcrumbs -->
-					<?php $this->widget('ext.jbreadcrumbs.jbreadcrumbsWidget',array(
-							'links'=>$this->breadcrumbs
-					));?>
+						<?php $this->widget('application.components.BootBreadcrumbs', array(
+							'links'=>$this->breadcrumbs,
+							'homeLink'=>'<li>'.CHtml::link(Yii::t('zii','Home'),'/').'</li>'
+						)); ?><!-- breadcrumbs -->
 					<?php endif?> 
-					<hr style="margin-top:20px;" />
 			<?php echo $content; ?>
 		</div>
 		<div class="col-md-4">		

@@ -365,7 +365,7 @@ $(function(){
 		'role'=>'form'
 	)
 )); ?>
-<div class="col-sm-11">
+	<div class="col-sm-9">
 	<?php echo $form->errorSummary($model); ?>
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'food',array('class'=>'col-sm-2 control-label')); ?>
@@ -483,8 +483,10 @@ $(function(){
 	     	<input type="text" id="tempRecord" />
 	    </div>
  	 </div>	
-</div>
+	</div>
+	<div class="col-sm-2">
 
+	</div>
 
 <?php $this->endWidget(); ?>
 <!-- form -->

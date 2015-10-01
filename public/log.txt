@@ -1,20 +1,6 @@
-[Datetime]15-09-15 04:52:09	[File]/home/wwwroot/www.simplebase.com/protected/vendor/Util/UtilHelper.php(363)
+[Datetime]15-09-16 04:05:45	[File]/data/home/qxu1649550479/htdocs/protected/vendor/Util/UtilHelper.php(363)
 Array
 (
-    [pid] => 34
-)
-
-[Datetime]15-09-15 04:52:09	[File]/home/wwwroot/www.simplebase.com/protected/vendor/Util/UtilHelper.php(363)
-Array
-(
-    [Filedata] => Array
-        (
-            [name] => 1.1.1平面直角坐标系（刘薇）.ppt
-            [type] => application/wps-office.ppt
-            [tmp_name] => /tmp/phpR6aXgu
-            [error] => 0
-            [size] => 927744
-        )
-
+    [pid] => 33
 )
 

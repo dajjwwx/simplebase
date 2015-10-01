@@ -69,7 +69,7 @@ class UtilUploader2 extends UtilUploader
 		// $result['Ext'] = $fileext;
 
 		// UtilHelper::writeToFile(__LINE__,'a+');
-		UtilHelper::writeToFile($_FILES,'a+');
+		// UtilHelper::writeToFile($_FILES,'a+');
 
 		//文件上传前的数据准备
 		$dataArray = self::fileData($name, $pid, $prefix);
@@ -165,8 +165,8 @@ class UtilUploader2 extends UtilUploader
 				}
 				else
 				{
-					// UtilHelper::dump($model->errors);
-					// UtilHelper::writeToFile($model->errors,'a+');
+					UtilHelper::dump($model->errors);
+					UtilHelper::writeToFile($model->errors,'a+');
 				}
 
 			}catch(CException $e){

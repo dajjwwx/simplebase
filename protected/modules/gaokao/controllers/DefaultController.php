@@ -73,11 +73,11 @@ class DefaultController extends Controller
 			// UtilHelper::dump($_FILES);
 
 			$qiniu = new \API\Qiniu();
-			$data = $qiniu->putFile($_FILES['file']['name'], $_FILES['file']['tmp_name']);
+			// $data = $qiniu->putFile($_FILES['file']['name'], $_FILES['file']['tmp_name']);
 
-			// $data = UtilUploader2::uploadQiniu('file',File::FILE_TYPE_PREPARATION,$folder,$pid,'*.doc;*.ppt;*.docx;*.pptx;*.pdf',$prefix='');
+			$data = UtilUploader2::uploadQiniu('file',File::FILE_TYPE_PREPARATION,$folder,$pid,'*.doc;*.ppt;*.docx;*.pptx;*.pdf',$prefix='');
 
-			// UtilHelper::dump($data);
+			UtilHelper::dump($data);
 
 			// $msg = UtilUploader2::uploadQiniu('file', File::FILE_TYPE_GAOKAO,$folder,$pid=null,$fileext='*.jpg;*.png;*.gif,*.pdf', $prefix = '');
 

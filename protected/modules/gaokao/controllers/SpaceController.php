@@ -271,6 +271,8 @@ class SpaceController extends Controller
 			
 			try{
 				$test = UtilUploader2::uploadQiniu('Filedata',File::FILE_TYPE_GAOKAO,Yii::app()->params['uploadGaoKaoPath'],$pid,'*.pdf');
+
+				echo $test;
 			}catch(Exception $e){
 				UtilHelper::writeToFile($e,'a+');
 			}

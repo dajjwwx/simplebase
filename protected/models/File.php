@@ -26,6 +26,8 @@
  * @property Category $category
  * @property User $owner
  * @property Profile[] $avatar
+ * @property Gaokao[] $paper
+ * @property Preparation[] $preparation
  */
 class File extends CActiveRecord
 {
@@ -102,7 +104,8 @@ class File extends CActiveRecord
 				'category' => array(self::BELONGS_TO, 'Category', 'pid'),
 				'owner' => array(self::BELONGS_TO, 'User', 'owner'),
 				'avatar' => array(self::HAS_ONE, 'Profile', 'avatar'),
-				'paper' => array(self::HAS_ONE, 'Gaokao', 'fid')
+				'paper' => array(self::HAS_ONE, 'Gaokao', 'fid'),
+				'preparation'=>array(self::HAS_ONE,'Preparation','fid'),
 		);
 	}
 

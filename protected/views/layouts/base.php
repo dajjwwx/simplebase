@@ -29,16 +29,27 @@
     	$this->registerScripts();
     ?>
     <script type="text/javascript">
-    $(function(){
 
-      if($(document.body).height() <= $(window).height() ){
+    var browserHeight = setInterval(browserHeight, 1000);
 
+    function broswerHeight()
+    {
+       if($(document.body).height() <= $(window).height() ){
+        
           $("#footer").css({
                 "position":"absolute",
                 "bottom":0
           });
 
-      }
+      }     
+    }
+
+    $(function(){
+
+      // alert($(document.body).height());
+      // alert($(window).height());
+
+
     });
     </script>
   </body>

@@ -12,7 +12,7 @@ $this->breadcrumbs=array(
 <?php 
 	$this->widget('ext.slider.BannerWidget');
 ?>
-<div id="loginBox" class="container">
+<div id="loginBox" class="container" style="margin-bottom:450px;">
 	<div class="col-md-9">
 	&nbsp;
 	</div>

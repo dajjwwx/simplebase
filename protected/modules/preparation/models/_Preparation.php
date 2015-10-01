@@ -31,10 +31,10 @@ class Preparation extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('cid, fid', 'required'),
-			array('cid, fid', 'numerical', 'integerOnly'=>true),
+			array('cid, fid,uid', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, cid, fid', 'safe', 'on'=>'search'),
+			array('id, cid, fid,uid', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,6 +60,7 @@ class Preparation extends CActiveRecord
 			'id' => 'ID',
 			'cid' => 'Cid',
 			'fid' => 'Fid',
+			'uid'=>'Uid'
 		);
 	}
 
@@ -107,5 +108,23 @@ class Preparation extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	/**
+	 * This is invoked before the record is saved.
+	 * @return boolean whether the record should be saved.
+	 */
+	protected function beforeSave()
+	{
+		if(parent::beforeSave())
+		{
+			if($this->isNewRecord)
+			{
+				$this->uid = Yii::app()->user->id;
+			}
+			return true;
+		}
+		else
+			return false;
 	}
 }

@@ -26,7 +26,7 @@
 
 	<div class="form-group">
 		<h5>选择科目</h5>
-		<p id="loadCourses" style="border:1px dashed grey;padding:5px;">
+		<div id="loadCourses" style="border:1px dashed grey;padding:5px;">
 			<?php $courses = Catalog::model()->getCourses();?>
 			<?php for($i=0; $i < sizeof($courses); $i++):?>
 				<span class="item">
@@ -36,7 +36,7 @@
 				</span>  
 			<?php endfor;?>
 			<input type="text" id="Preparation_Course" class="hide" />
-		</p>
+		</div>
 	</div>
 	<div class="row">	
 		<div class="form-group col-md-4">
@@ -55,7 +55,16 @@
 					</li>
 				<%}%>
 				</ul>
-			</script>		
+				<span>+</span>
+				<a href="javascript:void(0);" onclick="YKG.app().dom().showNext($(this));" class="more-setting">增加课本</a>			
+				<div style="display:none;">
+					<br />
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="请输入课本名称"  onblur="addCatalog(0,$(this));" />
+					</div>
+				</div>
+			</script>
+			<input type="text" id="Preparation_Chapter" class="hide" />
 		</div>
 		<div class="form-group col-md-4">
 			<h5>选择章节</h5>
@@ -75,8 +84,15 @@
 					</li>
 				<%}%>
 				</ul>
+				<span>+</span>
+				<a href="javascript:void(0);" onclick="YKG.app().dom().showNext($(this));" class="more-setting">增加章节</a>			
+				<div style="display:none;">
+					<br />
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="请输入章节名称" onblur="addCatalog($('#Preparation_Chapter').val(),$(this));" />
+					</div>
+				</div>
 			</script>
-			<input type="text" id="Preparation_Chapter" class="hide" />
 			<?php
 		// 		$this->widget('ext.treeview.TreeViewWidget',array(
 		// // 'link'=>''
@@ -107,8 +123,7 @@
 								<div style="border-bottom:1px solid grey;">
 								文件名：<a href="javascript:void(0);" id="<%=list[i].id%>">
 								<%=list[i].filename%>
-								</a><br />						
-
+								</a><br />
 								</div>
 							</li>
 						<%}%>
@@ -257,6 +272,43 @@
 		YKG.app().form().singleChoice(object,'Preparation_cid');
 
 		loadExistsFiles(object.attr('id'));
+	}
+
+	function addCatalog(pid,object)
+	{
+
+		// console.log($("#preparation-form").serializeArray());
+
+		var course = $("#Preparation_Course").val();
+
+		alert(pid);
+		// var pid = $("#Preparation_Chapter").val();
+
+		// var params = {
+		// 	'Catalog[course]':course, 
+		// 	'Catalog[pid]':pid, 
+		// 	'Catalog[name]':object.val()
+		// };
+
+		var params = {
+			'Catalog':{
+				'course':course,
+				'pid':pid,
+				'name':object.val()
+			}
+		};
+
+		console.log(params);
+
+
+		$.post('/preparation/catalog/create.html',params,function(data){
+			if(data.success == true)
+			{
+
+			}
+
+			console.log(data);
+		},'json');
 	}
 	
 </script>

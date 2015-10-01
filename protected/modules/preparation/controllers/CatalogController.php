@@ -66,8 +66,17 @@ class CatalogController extends Controller
 
 		$models = Catalog::model()->findAll($criteria);
 
-		$data = Catalog::model()->dataAdapter($models);
-		$data = CategoryModel::getChildrenObject($data,$pid);
+		if($models)
+		{
+			$data = Catalog::model()->dataAdapter($models);
+			$data = CategoryModel::getChildrenObject($data,$pid);			
+		}
+		else
+		{
+			$data = array();
+		}
+
+
 
 		echo json_encode($data);
 		// UtilHelper::dump($data);
@@ -92,6 +101,12 @@ class CatalogController extends Controller
 	 */
 	public function actionCreate()
 	{
+		echo $_POST['Catalog']['course'];
+
+		echo json_encode($_POST);
+
+		// Yii::app()->end();
+
 		$model=new Catalog;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -100,8 +115,23 @@ class CatalogController extends Controller
 		if(isset($_POST['Catalog']))
 		{
 			$model->attributes=$_POST['Catalog'];
+
+			UtilHelper::dump($model->attributes);
+
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				echo json_encode([
+					'success'=>true,
+					'data'=>$model->attributes
+				]);	
+				// $this->redirect(array('view','id'=>$model->id));
+			}
+			else
+			{
+				UtilHelper::dump($model->errors);
+			}
+
+			Yii::app()->end();
 		}
 
 		$this->render('create',array(

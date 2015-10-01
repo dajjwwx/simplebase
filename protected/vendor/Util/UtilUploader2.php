@@ -22,7 +22,8 @@ class UtilUploader2 extends UtilUploader
 				'name'=>$picture->getName(),
 				'size'=>$picture->getSize(),
 				//关于此处的使用在windows上用name而linux使用tempname
-				'mine'=>CFileHelper::getMimeType($picture->getTempName()),
+				// 'mine'=>CFileHelper::getMimeType($picture->getTempName()),
+				'mine'=>CFileHelper::getMimeType($picture->getName()),
 				'links'=>md5(date('ymdhis', $now).$picture->getName()),
 				'owner'=>Yii::app()->user->id,
 				'isfolder'=>0,
@@ -115,7 +116,6 @@ class UtilUploader2 extends UtilUploader
 
 				// $targetFile = File::model()->attributeAdapter($model)->generateFilePath($model, true, false, $folder);
 				$targetFile = File::model()->attributeAdapter($model)->getFilePath($folder, true, false);
-
 
 
 				// $result['Path']=array(

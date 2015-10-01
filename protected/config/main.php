@@ -22,7 +22,8 @@ return array(
 		'application.components.*',
 		//'application.helpers.*',
 		'application.modules.srbac.controllers.SBaseController',
-		//'application.modules.gaokao.models.*'
+		'application.modules.gaokao.models.*',
+		'application.modules.preparation.models.*',
 	),
 
 	'modules'=>array(

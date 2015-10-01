@@ -215,8 +215,6 @@ YKG.prototype.dom = function(){
         });
     };
 
-
-
     return this;
     
 };

@@ -7,9 +7,23 @@ class SpaceController extends Controller
 
 	public function actionIndex()
 	{
+		$model = new Preparation;
+
+		$model->fid = 1;
+		$model->cid = 2;
+
+		if($model->save())
+		{
+			UtilHelper::dump($model->attributes);
+		}
+		else
+		{
+			UtilHelper::dump($model->errors);
+		}
 
 
-		$this->render('index');
+
+		// $this->render('index');
 	}
 
 	// Uncomment the following methods and override them if needed

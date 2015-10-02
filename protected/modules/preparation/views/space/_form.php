@@ -276,19 +276,9 @@
 
 	function addCatalog(pid,object)
 	{
-
 		// console.log($("#preparation-form").serializeArray());
 
 		var course = $("#Preparation_Course").val();
-
-		alert(pid);
-		// var pid = $("#Preparation_Chapter").val();
-
-		// var params = {
-		// 	'Catalog[course]':course, 
-		// 	'Catalog[pid]':pid, 
-		// 	'Catalog[name]':object.val()
-		// };
 
 		var params = {
 			'Catalog':{
@@ -298,15 +288,12 @@
 			}
 		};
 
-		console.log(params);
-
-
 		$.post('/preparation/catalog/create.html',params,function(data){
 			if(data.success == true)
 			{
-
-			}
-
+				loadTextBooks($("#loadCourses span.selected a"));
+				loadTextBooks($("#loadTextBooks .list li.selected a"));
+			}			
 			console.log(data);
 		},'json');
 	}

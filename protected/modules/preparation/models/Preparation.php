@@ -7,6 +7,7 @@
  * @property integer $id
  * @property integer $cid
  * @property integer $fid
+ * @property integer $uid
  *
  * The followings are the available model relations:
  * @property File $file
@@ -48,6 +49,7 @@ class Preparation extends CActiveRecord
 		return array(
 			'file' => array(self::BELONGS_TO, 'File', 'fid'),
 			'catalog' => array(self::BELONGS_TO, 'Catalog', 'cid'),
+			'owner' => array(self::BELONGS_TO, 'User', 'uid'),
 		);
 	}
 
@@ -58,9 +60,9 @@ class Preparation extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'cid' => 'Cid',
-			'fid' => 'Fid',
-			'uid'=>'Uid'
+			'cid' => '章节目录ID',
+			'fid' => '文件ID',
+			'uid'=>'用户ID'
 		);
 	}
 
@@ -85,6 +87,7 @@ class Preparation extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('cid',$this->cid);
 		$criteria->compare('fid',$this->fid);
+		$criteria->compare('uid',$this->uid);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

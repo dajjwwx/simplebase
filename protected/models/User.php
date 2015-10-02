@@ -61,7 +61,8 @@ class User extends CActiveRecord
 		return array(
 			'categories' => array(self::HAS_MANY, 'Category', 'uid'),
 			'profiles'=>array(self::HAS_ONE,'Profile','uid'),
-			'favor'=>array(self::HAS_MANY,'Favor','uid')
+			'favor'=>array(self::HAS_MANY,'Favor','uid'),
+			'preparation'=>array(self::HAS_MANY,'preparation','uid')
 		);
 	}
 

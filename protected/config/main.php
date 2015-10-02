@@ -9,8 +9,6 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'悦珂谷',
 
-	'defaultController'=>'site',
-
 	'language'=>'zh_cn',
 
 	// preloading 'log' component
@@ -23,7 +21,7 @@ return array(
 		//'application.helpers.*',
 		'application.modules.srbac.controllers.SBaseController',
 		'application.modules.gaokao.models.*',
-		'application.modules.preparation.models.*',
+               'application.modules.preparation.models.*'
 	),
 
 	'modules'=>array(
@@ -60,11 +58,11 @@ return array(
 		),
 		'gaokao'=>array(),
 		'preparation'=>array(),
-		// 'blog'=>array(),
+		'blog'=>array(),
 		'administrator'=>array(
 			//'language'=>'zh_cn',	
 		),
-		// 'books'=>array(),
+		'books'=>array(),
 
 		
 	),
@@ -112,10 +110,10 @@ return array(
 		// database settings are configured in database.php
 		//'db'=>require(dirname(__FILE__).'/database.php'),
 		'db'=>array(
-				'connectionString' => 'mysql:host=qdm165430425.my3w.com;dbname=qdm165430425_db',
+				'connectionString' => 'mysql:host=localhost;dbname=simplebase',
 				'emulatePrepare' => true,
-				'username' => 'qdm165430425',
-				'password' => 'zclandxy5424346',
+				'username' => 'root',
+				'password' => 'blueidea',
 				'charset' => 'utf8',
 				'tablePrefix'=>'sb_',
 				'enableProfiling'=>true,
@@ -123,10 +121,10 @@ return array(
 		),
 		'dbLibaray'=>array(
 				'class'=> 'CDbConnection',
-				'connectionString' => 'mysql:host=qdm165430425.my3w.com;dbname=qdm165430425_db',
+				'connectionString' => 'mysql:host=localhost;dbname=simplelibaray',
 				'emulatePrepare' => true,
-				'username' => 'qdm165430425',
-				'password' => 'zclandxy5424346',
+				'username' => 'root',
+				'password' => 'blueidea',
 				'charset' => 'utf8',
 				'tablePrefix'=>'sl_',
 				'enableProfiling'=>true,
@@ -134,10 +132,10 @@ return array(
 		),		
 		'dbBlog'=>array(
 				'class'=> 'CDbConnection',
-				'connectionString' => 'mysql:host=qdm165430425.my3w.com;dbname=qdm165430425_db',
+				'connectionString' => 'mysql:host=localhost;dbname=simpleblog',
 				'emulatePrepare' => true,
-				'username' => 'qdm165430425',
-				'password' => 'zclandxy5424346',
+				'username' => 'root',
+				'password' => 'blueidea',
 				'charset' => 'utf8',
 				'tablePrefix'=>'sbg_',
 				'enableProfiling'=>true,
@@ -145,10 +143,10 @@ return array(
 		),
 		'dbGaokao'=>array(
 				'class'=> 'CDbConnection',
-				'connectionString' => 'mysql:host=qdm165430425.my3w.com;dbname=qdm165430425_db',
+				'connectionString' => 'mysql:host=localhost;dbname=simplegaokao',
 				'emulatePrepare' => true,
-				'username' => 'qdm165430425',
-				'password' => 'zclandxy5424346',
+				'username' => 'root',
+				'password' => 'blueidea',
 				'charset' => 'utf8',
 				'tablePrefix'=>'gk_',
 				'enableProfiling'=>true,
@@ -156,10 +154,10 @@ return array(
 		),
 		'dbPreparation'=>array(
 				'class'=> 'CDbConnection',
-				'connectionString' => 'mysql:host=qdm165430425.my3w.com;dbname=qdm165430425_db',
+				'connectionString' => 'mysql:host=localhost;dbname=simplepreparation',
 				'emulatePrepare' => true,
-				'username' => 'qdm165430425',
-				'password' => 'zclandxy5424346',
+				'username' => 'root',
+				'password' => 'blueidea',
 				'charset' => 'utf8',
 				'tablePrefix'=>'sp_',
 				'enableProfiling'=>true,
@@ -184,9 +182,9 @@ return array(
 				),
 				// uncomment the following to show log messages on web pages
 				
-				// array(
-				// 	'class'=>'CWebLogRoute',
-				// ),
+				array(
+					 'class'=>'CWebLogRoute',
+				),
 				
 			),
 		),

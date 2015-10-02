@@ -101,9 +101,9 @@ class CatalogController extends Controller
 	 */
 	public function actionCreate()
 	{
-		echo $_POST['Catalog']['course'];
+		// echo $_POST['Catalog']['course'];
 
-		echo json_encode($_POST);
+		// echo json_encode($_POST);
 
 		// Yii::app()->end();
 
@@ -116,7 +116,7 @@ class CatalogController extends Controller
 		{
 			$model->attributes=$_POST['Catalog'];
 
-			UtilHelper::dump($model->attributes);
+			// UtilHelper::dump($model->attributes);
 
 			if($model->save())
 			{
@@ -128,15 +128,15 @@ class CatalogController extends Controller
 			}
 			else
 			{
-				UtilHelper::dump($model->errors);
+				echo json_encode($model->errors);
 			}
 
 			Yii::app()->end();
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+		// $this->render('create',array(
+		// 	'model'=>$model,
+		// ));
 	}
 
 	/**

@@ -203,6 +203,45 @@ class Catalog extends CActiveRecord
 		}
 	}
 
+	// /**
+	//  *	关于目录删除，首先检查目录下是否有子目录，然后再检查是否有文件存在
+	//  */
+	// public function deleteCatalog($model)
+	// {
+
+	// 	if($model->children)
+	// 	{
+	// 		return json_encode([
+	// 			'success': false,
+	// 			'message': '该目录下还有子目录，请先删除子目录'
+	// 		]);
+	// 	}
+	// 	elseif($model->preparations)
+	// 	{
+	// 		return json_encode([
+	// 			'success': false,
+	// 			'message': '该目录下还有文件，请先删除该目录下的文件'
+	// 		]);
+	// 	}
+
+	// 	if($model->delete())
+	// 	{
+	// 		return json_encode([
+	// 			'success': true,
+	// 			'message': '已经成功删除～'
+	// 		]);
+	// 	}
+	// 	else
+	// 	{
+	// 		return json_encode([
+	// 			'success': false,
+	// 			'message': $model->errors
+	// 		]);
+	// 	}
+
+
+	// }
+
 
 
 

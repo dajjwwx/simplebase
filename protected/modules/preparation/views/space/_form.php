@@ -60,7 +60,7 @@
 				<div style="display:none;">
 					<br />
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="请输入课本名称"  onblur="addCatalog(0,$(this));" />
+						<input type="text" class="form-control" placeholder="请输入课本名称"  onblur="addTextBooksCatalog($(this));" />
 					</div>
 				</div>
 			</script>
@@ -81,6 +81,7 @@
 						<a href="javascript:void(0);" id="<%=list[i].id%>" onclick="setCatalogID($(this));">
 						<%=list[i].name%>
 						</a>
+						<a href="javascript:void(0);" style="margin-left:50px;" onclick="deleteCatalog($(this).prev());">x</a>
 					</li>
 				<%}%>
 				</ul>
@@ -89,7 +90,7 @@
 				<div style="display:none;">
 					<br />
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="请输入章节名称" onblur="addCatalog($('#Preparation_Chapter').val(),$(this));" />
+						<input type="text" class="form-control" placeholder="请输入章节名称" onblur="addChapterCatalog($(this));" />
 					</div>
 				</div>
 			</script>
@@ -154,6 +155,7 @@
 </div><!-- form -->
 
 <script type="text/javascript">
+
 		
 	function checkUploadData(){
 		var cid = $("#Preparation_cid").val();
@@ -274,11 +276,44 @@
 		loadExistsFiles(object.attr('id'));
 	}
 
-	function addCatalog(pid,object)
+	function deleteCatalog(object)
 	{
-		// console.log($("#preparation-form").serializeArray());
+		var id = object.attr('id');
 
+		$.post('/preparation/catalog/delete/'+id + '.html',function(data){
+			console.log(data);
+		});
+	}
+
+
+
+	/**
+	 * 添加章节目录
+	 */
+	function addCatalog(pid, object, func)
+	{
 		var course = $("#Preparation_Course").val();
+
+		if(course == ""){
+			body = "请选择科目"
+		}
+
+		if(pid == ""){
+			body = "请选择章节目录"
+		}
+
+		if(course == "" || pid == "")
+		{
+			YKG.app("bootstrap").showModal({
+				"id":"defaultModal",
+				"title":"操作提示",
+				"body":body,
+				"showEvent":function(){
+					// alert("HEllo wrld");
+				}
+			}).show().showEvent();		
+			return false;			
+		}
 
 		var params = {
 			'Catalog':{
@@ -287,33 +322,30 @@
 				'name':object.val()
 			}
 		};
-
 		$.post('/preparation/catalog/create.html',params,function(data){
 			if(data.success == true)
 			{
-				loadTextBooks($("#loadCourses span.selected a"));
-				loadTextBooks($("#loadTextBooks .list li.selected a"));
+				func();
 			}			
 			console.log(data);
-		},'json');
+		},'json');		
+	}
+
+	function addTextBooksCatalog(object)
+	{
+		var pid = 0;
+		addCatalog(pid, object, function(){
+			loadTextBooks($("#loadCourses span.selected a"));
+		});
+	}
+
+	function addChapterCatalog(object)
+	{
+		var pid = $("#Preparation_cid").val()	 || $("#Preparation_Chapter").val();
+
+		addCatalog(pid, object, function(){
+			loadChapters($("#loadTextBooks .list li.selected a"));
+		});							
 	}
 	
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-

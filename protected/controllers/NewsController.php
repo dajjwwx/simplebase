@@ -1,12 +1,12 @@
 <?php
 
-class CoursePaperController extends Controller
+class NewsController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/gaokao';
+	public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -28,11 +28,11 @@ class CoursePaperController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','paper'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','province'),
+				'actions'=>array('create','update','test'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -56,59 +56,30 @@ class CoursePaperController extends Controller
 		));
 	}
 
-	public function actionProvince($province, $year)
+	public function actionTest()
 	{
-		$this->layout = '/layouts/blank';
+		$model = new News();
 
-		$criteria = new CDbCriteria(array(
-			'condition'=>'province = :province AND year = :year',
-			'params'=>array(
-				':province'=>$province,
-				':year'=>$year
-			)
-		));
+		$model->content = "台词指导";
+		$model->channel = News::CHANNEL_BLOG;
+		$model->page = 12;
+		$model->time = time();
+		$model->uid = Yii::app()->user->id;
 
-		$model = CoursePaper::model()->findAll($criteria);
 
-		if(!$model)
+		print_r($model->attributes);
+
+		if($model->save())
 		{
-
-			$or = Gaokao::model()->provinceLike($province);
-
-			$papercriteria = new CDbCriteria(array(
-				'condition'=>'year = :year AND ('.$or.')',
-				'params'=>array(
-					':year'=>$year
-				)
-			));
-
-			$paper = Paper::model()->find($papercriteria);
-
-			// UtilHelper::dump($paper);
+			UtilHelper::dump($model->attributes);
 		}
-
-		$this->render('province',array(
-			'model'=>$model,
-			'paper'=>$paper
-		));
+		else
+		{
+			UtilHelper::dump($model->errors);
+		}
 	}
 
 
-	public function actionPaper()
-	{
-
-		$this->layout = '/layouts/blank';
-
-		$year = isset($_GET['year'])?$_GET['year']:date('Y');
-
-		$model = Paper::model()->getPapers($year);
-
-		$this->render('paper',array(
-			'model'=>$model
-		));
-
-
-	}
 
 	/**
 	 * Creates a new model.
@@ -116,49 +87,17 @@ class CoursePaperController extends Controller
 	 */
 	public function actionCreate()
 	{
-
-		$this->layout = '//layouts/space';
-
-		$model=new CoursePaper;
+		$model=new News;
 
 		// Uncomment the following line if AJAX validation is needed
-		$this->performAjaxValidation($model);
+		// $this->performAjaxValidation($model);
 
-		$year = $_POST['CoursePaper']['year'];
-		$province = $_POST['CoursePaper']['province'];
-		$course = $_POST['CoursePaper']['course'];
-
-		if(isset($_POST['CoursePaper']))
+		if(isset($_POST['News']))
 		{
-			
-			$model->attributes=$_POST['CoursePaper'];
-			
-			if(CoursePaper::model()->exists('year = :year AND province = :province AND course = :course',array(':year'=>$year,':province'=>$province,'course'=>$course)))
-			{
-				$result = array('status'=>'fail','message'=>'已经有了!');
-
-			}
-			else
-			{				
-				
-				if($model->validate() && $model->save())
-				{
-					$result = array('status'=>'success','message'=>'添加成功！');
-
-				}
-				else
-				{
-					$result = array('status'=>'fail','message'=>$model->errors);
-				}
-					
-			}
-
-			echo json_encode($result);
-
-			return ;
+			$model->attributes=$_POST['News'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
 		}
-
-
 
 		$this->render('create',array(
 			'model'=>$model,
@@ -177,9 +116,9 @@ class CoursePaperController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['CoursePaper']))
+		if(isset($_POST['News']))
 		{
-			$model->attributes=$_POST['CoursePaper'];
+			$model->attributes=$_POST['News'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -208,7 +147,7 @@ class CoursePaperController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('CoursePaper');
+		$dataProvider=new CActiveDataProvider('News');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -219,10 +158,10 @@ class CoursePaperController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new CoursePaper('search');
+		$model=new News('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['CoursePaper']))
-			$model->attributes=$_GET['CoursePaper'];
+		if(isset($_GET['News']))
+			$model->attributes=$_GET['News'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -233,12 +172,12 @@ class CoursePaperController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return CoursePaper the loaded model
+	 * @return News the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=CoursePaper::model()->findByPk($id);
+		$model=News::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -246,11 +185,11 @@ class CoursePaperController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param CoursePaper $model the model to be validated
+	 * @param News $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='CoursePaper-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='news-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

@@ -78,7 +78,7 @@
 
 		// alert($("#CoursePaper_province").val() + '----' + $("#CoursePaper_year").val());
 
-		var href = '/gaokao/coursepaper/province.html?province='+$("#CoursePaper_province").val()+'&year='+$("#CoursePaper_year").val();
+		var href = '/gaokao/coursePaper/province.html?province='+$("#CoursePaper_province").val()+'&year='+$("#CoursePaper_year").val();
 
 		YKG.app('dom').preAjax($("#paperInfo"));
 
@@ -88,12 +88,12 @@
 	$(function(){
 
 
-		$("#loadPaper").load('/gaokao/coursepaper/paper.html?year='+$("#CoursePaper_year").val()+'&paper='+$("#CoursePaper_course").val());
+		$("#loadPaper").load('/gaokao/coursePaper/paper.html?year='+$("#CoursePaper_year").val()+'&paper='+$("#CoursePaper_course").val());
 
 		$("#CoursePaper_year").change(function(){			
 			
 			YKG.app('dom').preAjax($("#loadPaper"));
-			$("#loadPaper").load('/gaokao/coursepaper/paper.html?year='+$(this).val()+'&paper='+$("#CoursePaper_course").val());
+			$("#loadPaper").load('/gaokao/coursePaper/paper.html?year='+$(this).val()+'&paper='+$("#CoursePaper_course").val());
 
 		});
 
@@ -104,11 +104,11 @@
 
 			YKG.app('dom').preAjax($("#paperInfo"));
 
-			$.post('/gaokao/coursepaper/create.html',params,function(data){
+			$.post('/gaokao/coursePaper/create.html',params,function(data){
 				$("#paperInfo").html(data.result);
 				if(data.status == 'success'){
 					alert(data.message);
-					$("#paperInfo").load('/gaokao/coursepaper/province.html?province='+$("#CoursePaper_province").val()+'&year='+$("#CoursePaper_year").val());
+					$("#paperInfo").load('/gaokao/coursePaper/province.html?province='+$("#CoursePaper_province").val()+'&year='+$("#CoursePaper_year").val());
 				}else{
 					console.log(data.message);
 				}

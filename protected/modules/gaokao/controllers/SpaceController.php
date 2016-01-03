@@ -200,6 +200,7 @@ class SpaceController extends Controller
 	 */
 	public function actionCreate()
 	{
+		$this->layout = '//layouts/space';
 
 		$model=new Gaokao;
 

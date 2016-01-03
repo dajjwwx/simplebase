@@ -48,7 +48,6 @@ class CatalogController extends Controller
 	public function actionCatalog($course, $pid = 0)
 	{
 
-
 		$criteria = new CDbCriteria(array(
 			'condition'=>'course = :course',
 			'params'=>array(
@@ -61,8 +60,6 @@ class CatalogController extends Controller
 		{
 			$criteria->addCondition('pid = '. $pid);
 		}
-
-
 
 		$models = Catalog::model()->findAll($criteria);
 
@@ -134,9 +131,9 @@ class CatalogController extends Controller
 			Yii::app()->end();
 		}
 
-		// $this->render('create',array(
-		// 	'model'=>$model,
-		// ));
+		$this->render('create',array(
+			'model'=>$model,
+		));
 	}
 
 	/**

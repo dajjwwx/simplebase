@@ -6,6 +6,7 @@ return array(
 	'Preparations'=>'备课本',
 	'Preparation'=>'备课本',
 
-	'Update Preparation Information'=>'更新备课信息'
+	'Update Preparation Information'=>'更新备课信息',
+	'Upload Preparation'=>'上传课件',
 );
 ?>

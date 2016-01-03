@@ -105,7 +105,7 @@
 			<div class="form-group">
 				<?php if($this->action->id == 'update'):?>
 					<div style="border:1px dashed grey;padding:5px;">
-					修改信息不能上提供上传服务
+					修改信息不提供上传服务
 					</div>
 				<?php else:?>
 					<?php $this->renderPartial('upload');?>

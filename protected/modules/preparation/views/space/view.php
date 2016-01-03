@@ -34,7 +34,13 @@ $this->breadcrumbs = array_merge($this->breadcrumbs,array(UtilString::strSlice($
 				<p>上传时间：<?php echo date('Y/m/d',$model->file->created);?></p>
 				<p>文件大小：<?php echo UtilFileInfo::formatSize($model->file->size);?></p>
 				<br />
-				<p><a href="/preparation/space/download.html?id=<?php echo $model->id;?>"><button type="button" id="downloadButton" class="btn btn-primary btn-lg">下载</button></a></p>
+				<p>
+					<a href="/preparation/space/download.html?id=<?php echo $model->id;?>">
+						<button type="button" id="downloadButton" class="btn btn-primary btn-lg">
+							<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>	下载
+						</button>
+					</a>
+				</p>
 
 				<hr />
 

@@ -15,12 +15,11 @@ class RecentWidget extends CWidget
 	
 	public function init()
 	{
-                           $dataProvider=new CActiveDataProvider('File',array(
+                           $dataProvider=new CActiveDataProvider('Preparation',array(
 		'criteria'=>array(
-                                            'condition'=>'filetype = :type AND owner = :uid',
+                                            'condition'=>'uid = :uid',
                                             'order'=>'id DESC',
                                             'params'=>array(
-                                                    ':type'=>File::FILE_TYPE_PREPARATION,
                                                     ':uid'=>Yii::app()->user->id
                                             )
                                     )

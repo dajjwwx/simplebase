@@ -62,6 +62,9 @@ class PaperController extends Controller
 	 */
 	public function actionCreate()
 	{
+
+		$this->layout = '//layouts/space';
+
 		$result = array();
 
 		$model=new Paper;

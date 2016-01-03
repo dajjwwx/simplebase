@@ -6,7 +6,7 @@ class CoursePaperController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/gaokao';
+	public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -28,11 +28,11 @@ class CoursePaperController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','paper'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','province'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -56,109 +56,23 @@ class CoursePaperController extends Controller
 		));
 	}
 
-	public function actionProvince($province, $year)
-	{
-		$this->layout = '/layouts/blank';
-
-		$criteria = new CDbCriteria(array(
-			'condition'=>'province = :province AND year = :year',
-			'params'=>array(
-				':province'=>$province,
-				':year'=>$year
-			)
-		));
-
-		$model = CoursePaper::model()->findAll($criteria);
-
-		if(!$model)
-		{
-
-			$or = Gaokao::model()->provinceLike($province);
-
-			$papercriteria = new CDbCriteria(array(
-				'condition'=>'year = :year AND ('.$or.')',
-				'params'=>array(
-					':year'=>$year
-				)
-			));
-
-			$paper = Paper::model()->find($papercriteria);
-
-			// UtilHelper::dump($paper);
-		}
-
-		$this->render('province',array(
-			'model'=>$model,
-			'paper'=>$paper
-		));
-	}
-
-
-	public function actionPaper()
-	{
-
-		$this->layout = '/layouts/blank';
-
-		$year = isset($_GET['year'])?$_GET['year']:date('Y');
-
-		$model = Paper::model()->getPapers($year);
-
-		$this->render('paper',array(
-			'model'=>$model
-		));
-
-
-	}
-
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
 	{
-
-		$this->layout = '//layouts/space';
-
 		$model=new CoursePaper;
 
 		// Uncomment the following line if AJAX validation is needed
-		$this->performAjaxValidation($model);
-
-		$year = $_POST['CoursePaper']['year'];
-		$province = $_POST['CoursePaper']['province'];
-		$course = $_POST['CoursePaper']['course'];
+		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['CoursePaper']))
 		{
-			
 			$model->attributes=$_POST['CoursePaper'];
-			
-			if(CoursePaper::model()->exists('year = :year AND province = :province AND course = :course',array(':year'=>$year,':province'=>$province,'course'=>$course)))
-			{
-				$result = array('status'=>'fail','message'=>'已经有了!');
-
-			}
-			else
-			{				
-				
-				if($model->validate() && $model->save())
-				{
-					$result = array('status'=>'success','message'=>'添加成功！');
-
-				}
-				else
-				{
-					$result = array('status'=>'fail','message'=>$model->errors);
-				}
-					
-			}
-
-			echo json_encode($result);
-
-			return ;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
 		}
-
-
 
 		$this->render('create',array(
 			'model'=>$model,
@@ -250,7 +164,7 @@ class CoursePaperController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='CoursePaper-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='course-paper-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

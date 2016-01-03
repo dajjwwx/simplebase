@@ -31,7 +31,9 @@
             <?php endforeach;?>
             <?php endif;?>
             <?php if(!Yii::app()->user->isGuest):?>
-                <li><a href="<?php echo $this->createUrl('/space/index',array('id'=>Yii::app()->user->id));?>">My Space</a></li>
+                <li <?php echo ($this->module->id == 'space')?'class="active"':'';?>>
+                    <a href="<?php echo $this->createUrl('/space/default/index',array('id'=>Yii::app()->user->id));?>">我的空间</a>
+                </li>
             <?php endif;?>
 
 

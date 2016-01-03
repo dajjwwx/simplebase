@@ -1,22 +1,37 @@
+<style type="text/css">
+.view_info{
+	padding:1em;
+	transition:all .9s ease;
+	border-bottom:1px dotted #e2e2e2
+}
+.view_info h5{
+	font-size:16px;
+}
+
+.view_info:hover{
+	background: #f6f4f7;
+}
+</style>
 <div class="view_info">
 	<?php //echo Gaokao::model()->getPaperLink($province,$model->course,$model->year); ?>		
-	<h5><span class="glyphicon glyphicon-file" aria-hidden="true"></span> <?php //echo CHtml::link($data->file->name,array('space/view','id'=>$data->id));?></h5>
+	<h5>
+		<span class="glyphicon glyphicon-file" aria-hidden="true"></span> 
+		<?php echo CHtml::link($data->file->name,array('/preparation/space/view','id'=>$data->id));?>
+	</h5>
 	<span class="item">
-                                    <?php echo $data->preparation->cid;?>
-		科目：<?php //echo Catalog::model()->getCourseName($data->preparation->catalog->course);?>
+		科目：<?php echo Catalog::model()->getCourseName($data->catalog->course);?>
 	</span>
 	<span class="item">
-		上传时间：<?php echo date('Y-m-d',$data->created);?>
+		上传时间：<?php echo date('Y-m-d',$data->file->created);?>
 	</span>
 	<span class="item">
-		<?php if(UtilAuth::isLogin($data->owner)):?>
-			<a href="<?php //echo $this->createUrl('space/update',array('id'=>$data->preparation->id));?>">修改</a> / 
-			<a href="<?php //echo $this->createUrl('space/delete',array('id'=>$data->preparation->id,'fid'=>$data->id));?>" onclick="deletePaper($(this));return false;">删除</a>
+		<?php if(UtilAuth::isLogin($data->file->owner)):?>
+			<a href="<?php echo $this->createUrl('/preparation/space/update',array('id'=>$data->id));?>">修改</a> / 
+			<a href="<?php echo $this->createUrl('/preparation/space/delete',array('id'=>$data->id,'fid'=>$data->file>id));?>" onclick="deletePaper($(this));return false;">删除</a>
 		<?php endif;?>
 	</span>
 	<br />
 	<span class="item">
-		章节：<?php //$breadcrumbs = Catalog::model()->generateBreadcrumbs($data->preparation->cid,$data->preparation->catalog->course); $category = new CategoryModel(); echo $category->generatePageTitle($breadcrumbs,true,' / ');?>
+		章节：<?php $breadcrumbs = Catalog::model()->generateBreadcrumbs($data->cid,$data->catalog->course); $category = new CategoryModel(); echo $category->generatePageTitle($breadcrumbs,true,' / ');?>
 	</span>
-	<hr />
 </div>

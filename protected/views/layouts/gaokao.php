@@ -49,7 +49,7 @@
 							<li class="list-group-item"><?php echo CHtml::link('上传试题',array('space/create'));?></li>
 							<?php if(Yii::app()->user->name == 'admin'):?>
 							<li class="list-group-item"><?php echo CHtml::link('添加试卷类型',array('paper/create'));?></li>
-							<li class="list-group-item"><?php echo CHtml::link('添加特殊试卷',array('coursepaper/create'));?></li>
+							<li class="list-group-item"><?php echo CHtml::link('添加特殊试卷',array('coursePaper/create'));?></li>
 							<?php endif;?>
 						</ul>					
 						<?php

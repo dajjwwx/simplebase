@@ -203,6 +203,7 @@ class SpaceController extends Controller
 	 */
 	public function actionCreate()
 	{
+		$this->layout = '//layouts/space';
 		$model=new Preparation;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -213,6 +214,12 @@ class SpaceController extends Controller
 			$model->attributes=$_POST['Preparation'];
 			if($model->save())
 			{
+
+				$content = $model->file->owner. '于'.date('m-d h:i:s').'上传课件:'.$model->file->filename;
+				$type = News::CHANNEL_PREPARATION;
+
+				News::model()->saveNews($content, $type, $model->id);
+
 				echo json_encode($model->attributes);
 				// $this->redirect(array('view','id'=>$model->id));
 				Yii::app()->end();
@@ -347,6 +354,7 @@ class SpaceController extends Controller
 	 */
 	public function actionIndex()
 	{
+
 		$criteria = new CDbCriteria(array(
 			'order'=>'id DESC'
 		));

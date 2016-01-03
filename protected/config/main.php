@@ -63,6 +63,7 @@ return array(
 			//'language'=>'zh_cn',	
 		),
 		'books'=>array(),
+		'space'=>array(),
 
 		
 	),

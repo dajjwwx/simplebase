@@ -15,8 +15,9 @@
 			</div>
 			<div class="panel-body">
 				<ul class="list-group">
-					<li class="list-group-item"><?php echo CHtml::link('我的动态',array('space/create'));?></li>
-					<li class="list-group-item"><?php echo CHtml::link('我的课件',array('/preparation/default/index'));?></li>   
+					<li class="list-group-item"><?php echo CHtml::link('我的动态',array('/space/default/index'));?></li>
+					<li class="list-group-item"><?php echo CHtml::link('上传课件',array('/preparation/space/create'));?></li>
+					<li class="list-group-item"><?php echo CHtml::link('上传高考真题',array('/gaokao/space/create'));?></li>      
 
 
 				</ul>	

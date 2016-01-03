@@ -1,12 +1,12 @@
 <?php
 
-class CoursePaperController extends Controller
+class TraceController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/gaokao';
+	public $layout='//layouts/space';
 
 	/**
 	 * @return array action filters
@@ -28,11 +28,11 @@ class CoursePaperController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','paper'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','province'),
+				'actions'=>array('create','update','test'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -45,6 +45,27 @@ class CoursePaperController extends Controller
 		);
 	}
 
+	public function actionTest()
+	{
+		$model = new Trace();
+
+		// $model->event = "新的事件";
+		$model->event_id = 2;
+		$model->event_type = Trace::EVENT_TYPE_BLOG;
+
+		print_r($model);
+
+		// if($model->save())
+		// {
+		// 	UtilHelper::dump($model->attributes);
+		// }
+		// else
+		// {
+		// 	UtilHelper::dump($model->errors);
+		// }
+	}
+
+
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -56,109 +77,23 @@ class CoursePaperController extends Controller
 		));
 	}
 
-	public function actionProvince($province, $year)
-	{
-		$this->layout = '/layouts/blank';
-
-		$criteria = new CDbCriteria(array(
-			'condition'=>'province = :province AND year = :year',
-			'params'=>array(
-				':province'=>$province,
-				':year'=>$year
-			)
-		));
-
-		$model = CoursePaper::model()->findAll($criteria);
-
-		if(!$model)
-		{
-
-			$or = Gaokao::model()->provinceLike($province);
-
-			$papercriteria = new CDbCriteria(array(
-				'condition'=>'year = :year AND ('.$or.')',
-				'params'=>array(
-					':year'=>$year
-				)
-			));
-
-			$paper = Paper::model()->find($papercriteria);
-
-			// UtilHelper::dump($paper);
-		}
-
-		$this->render('province',array(
-			'model'=>$model,
-			'paper'=>$paper
-		));
-	}
-
-
-	public function actionPaper()
-	{
-
-		$this->layout = '/layouts/blank';
-
-		$year = isset($_GET['year'])?$_GET['year']:date('Y');
-
-		$model = Paper::model()->getPapers($year);
-
-		$this->render('paper',array(
-			'model'=>$model
-		));
-
-
-	}
-
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
 	{
-
-		$this->layout = '//layouts/space';
-
-		$model=new CoursePaper;
+		$model=new Trace;
 
 		// Uncomment the following line if AJAX validation is needed
-		$this->performAjaxValidation($model);
+		// $this->performAjaxValidation($model);
 
-		$year = $_POST['CoursePaper']['year'];
-		$province = $_POST['CoursePaper']['province'];
-		$course = $_POST['CoursePaper']['course'];
-
-		if(isset($_POST['CoursePaper']))
+		if(isset($_POST['Trace']))
 		{
-			
-			$model->attributes=$_POST['CoursePaper'];
-			
-			if(CoursePaper::model()->exists('year = :year AND province = :province AND course = :course',array(':year'=>$year,':province'=>$province,'course'=>$course)))
-			{
-				$result = array('status'=>'fail','message'=>'已经有了!');
-
-			}
-			else
-			{				
-				
-				if($model->validate() && $model->save())
-				{
-					$result = array('status'=>'success','message'=>'添加成功！');
-
-				}
-				else
-				{
-					$result = array('status'=>'fail','message'=>$model->errors);
-				}
-					
-			}
-
-			echo json_encode($result);
-
-			return ;
+			$model->attributes=$_POST['Trace'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
 		}
-
-
 
 		$this->render('create',array(
 			'model'=>$model,
@@ -177,9 +112,9 @@ class CoursePaperController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['CoursePaper']))
+		if(isset($_POST['Trace']))
 		{
-			$model->attributes=$_POST['CoursePaper'];
+			$model->attributes=$_POST['Trace'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -208,7 +143,7 @@ class CoursePaperController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('CoursePaper');
+		$dataProvider=new CActiveDataProvider('Trace');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -219,10 +154,10 @@ class CoursePaperController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new CoursePaper('search');
+		$model=new Trace('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['CoursePaper']))
-			$model->attributes=$_GET['CoursePaper'];
+		if(isset($_GET['Trace']))
+			$model->attributes=$_GET['Trace'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -233,12 +168,12 @@ class CoursePaperController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return CoursePaper the loaded model
+	 * @return Trace the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=CoursePaper::model()->findByPk($id);
+		$model=Trace::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -246,11 +181,11 @@ class CoursePaperController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param CoursePaper $model the model to be validated
+	 * @param Trace $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='CoursePaper-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='trace-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

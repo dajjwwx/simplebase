@@ -64,6 +64,7 @@ return array(
 		),
 		'books'=>array(),
 		'space'=>array(),
+		'testbank'=>array(),
 
 		
 	),
@@ -161,6 +162,17 @@ return array(
 				'password' => 'blueidea',
 				'charset' => 'utf8',
 				'tablePrefix'=>'sp_',
+				'enableProfiling'=>true,
+				'schemaCachingDuration'=>3600,
+		),
+		'dbTestbank'=>array(
+				'class'=> 'CDbConnection',
+				'connectionString' => 'mysql:host=localhost;dbname=simpletestbank',
+				'emulatePrepare' => true,
+				'username' => 'root',
+				'password' => 'blueidea',
+				'charset' => 'utf8',
+				'tablePrefix'=>'stb_',
 				'enableProfiling'=>true,
 				'schemaCachingDuration'=>3600,
 		),

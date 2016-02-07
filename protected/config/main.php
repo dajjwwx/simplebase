@@ -21,7 +21,9 @@ return array(
 		//'application.helpers.*',
 		'application.modules.srbac.controllers.SBaseController',
 		'application.modules.gaokao.models.*',
-               'application.modules.preparation.models.*'
+        'application.modules.preparation.models.*',
+        'application.modules.testbank.models.*',
+        'application.modules.subject.models.*'
 	),
 
 	'modules'=>array(
@@ -64,6 +66,8 @@ return array(
 		),
 		'books'=>array(),
 		'space'=>array(),
+		'testbank'=>array(),
+		'subject'=>array(),
 
 		
 	),
@@ -161,6 +165,28 @@ return array(
 				'password' => 'blueidea',
 				'charset' => 'utf8',
 				'tablePrefix'=>'sp_',
+				'enableProfiling'=>true,
+				'schemaCachingDuration'=>3600,
+		),
+		'dbTestbank'=>array(
+				'class'=> 'CDbConnection',
+				'connectionString' => 'mysql:host=localhost;dbname=simpletestbank',
+				'emulatePrepare' => true,
+				'username' => 'root',
+				'password' => 'blueidea',
+				'charset' => 'utf8',
+				'tablePrefix'=>'stb_',
+				'enableProfiling'=>true,
+				'schemaCachingDuration'=>3600,
+		),
+		'dbSubject'=>array(
+				'class'=> 'CDbConnection',
+				'connectionString' => 'mysql:host=localhost;dbname=simplesubject',
+				'emulatePrepare' => true,
+				'username' => 'root',
+				'password' => 'blueidea',
+				'charset' => 'utf8',
+				'tablePrefix'=>'ss_',
 				'enableProfiling'=>true,
 				'schemaCachingDuration'=>3600,
 		),

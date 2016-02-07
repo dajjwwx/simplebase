@@ -51,6 +51,8 @@ return array(
 		'uploadGaoKaoPath'		=>	'/public/upload/GaoKao/',
 		//Preparation文件上传路径
 		'uploadPreparationPath'		=>  '/public/upload/Preparation/',
+		//Testbank文件上传路径
+		'uploadTestbankPath'		=>	'/public/upload/Testbank/',
 		
 		/*********************************/
 

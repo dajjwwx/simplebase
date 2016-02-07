@@ -25,6 +25,8 @@ class Category extends CActiveRecord
 	const CATEGORY_LAB = 40;				//实验项目分类
 	const CATEGORY_BRAINSTROMING = 50;		//头脑风暴分类
 	const CATEGORY_BOOKS = 60;		//图书分类
+	const CATEOGRY_EDU = 70;		//教育资料分类
+	const CATEGORY_EDU_SUBJECT= 73;	//专题资料分类
 	
 	
 	const TREE_VIEW_CHECK = 'check';		//带checkbox显示分类
@@ -67,6 +69,7 @@ class Category extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'owner' => array(self::BELONGS_TO, 'User', 'uid'),
+			'subject'=>array(self::HAS_ONE, 'Subject', 'sid')
 		);
 	}
 
@@ -156,6 +159,13 @@ class Category extends CActiveRecord
 				break;
 			case self::CATEGORY_BOOKS:
 				return Yii::t('basic','Books');
+				break;
+			case self::CATEOGRY_EDU:
+				return Yii::t('basic','Education');
+				break;
+			case self::CATEGORY_EDU_SUBJECT:
+				return Yii::t('basic','Test Subject');
+				break;
 		}
 	}
 	
@@ -173,7 +183,9 @@ class Category extends CActiveRecord
 			self::CATEGORY_LAB=>self::getCategoryTypeName(self::CATEGORY_LAB),
 			self::CATEGORY_VIDEO_EDU=>self::getCategoryTypeName(self::CATEGORY_VIDEO_EDU),
 			self::CATEGORY_BRAINSTROMING=>self::getCategoryTypeName(self::CATEGORY_BRAINSTROMING),
-			self::CATEGORY_BOOKS=>self::getCategoryTypeName(self::CATEGORY_BOOKS)
+			self::CATEGORY_BOOKS=>self::getCategoryTypeName(self::CATEGORY_BOOKS),
+			self::CATEOGRY_EDU=>self::getCategoryTypeName(self::CATEOGRY_EDU),
+			self::CATEGORY_EDU_SUBJECT=>self::getCategoryTypeName(self::CATEGORY_EDU_SUBJECT),
 				
 		);
 	}

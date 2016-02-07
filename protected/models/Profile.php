@@ -71,6 +71,7 @@ class Profile extends CActiveRecord
 	const BLOOD_A = 'A';
 	const BLOOD_B = 'B';
 	const BLOOD_O = 'O';
+	const BLOOD_AB = 'AB';
 	
 	//日历
 	const CALENDAR_SOLOR = 1;
@@ -366,7 +367,9 @@ class Profile extends CActiveRecord
 		return array(
 				self::BLOOD_A,
 				self::BLOOD_B,
-				self::BLOOD_O
+				self::BLOOD_AB,
+				self::BLOOD_O,
+
 		);
 	}
 	

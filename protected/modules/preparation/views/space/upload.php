@@ -10,7 +10,7 @@
 						//'showDownload'=>true,
 						//'statusBarWidth'=>600,
 						//'dragdropWidth'=>600,
-						'multiple'=>false,
+						'multiple'=>true,
 						'extErrorStr'=>'允许上传的文件格式为：',
 						'sizeErrorStr'=>'您的文件太大了，最大只能上传',
 						'dynamicFormData'=>'js:function(){

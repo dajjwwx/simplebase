@@ -22,5 +22,4 @@
 	<span class="item">
 		章节：<?php $breadcrumbs = Catalog::model()->generateBreadcrumbs($data->cid,$data->catalog->course); $category = new CategoryModel(); echo $category->generatePageTitle($breadcrumbs,true,' / ');?>
 	</span>
-	<hr />
 </div>

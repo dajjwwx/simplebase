@@ -75,6 +75,8 @@ return array(
 		'Lab'=>'实验室',
 		'Education Video'=>'教学视频',
 		'Brain Stroming'=>'头脑风暴',
+		'Education'=>'教学',
+		'Test Subject'=>'专题资料',
 		
 		//Profile
 		'Profile'=>'个人资料',

@@ -67,7 +67,10 @@ return array(
 		'books'=>array(),
 		'space'=>array(),
 		'testbank'=>array(),
+<<<<<<< HEAD
 		'subject'=>array(),
+=======
+>>>>>>> 8fe685b188bed6bd951690014f315970955d393e
 
 		
 	),
@@ -179,6 +182,7 @@ return array(
 				'enableProfiling'=>true,
 				'schemaCachingDuration'=>3600,
 		),
+<<<<<<< HEAD
 		'dbSubject'=>array(
 				'class'=> 'CDbConnection',
 				'connectionString' => 'mysql:host=localhost;dbname=simplesubject',
@@ -190,6 +194,8 @@ return array(
 				'enableProfiling'=>true,
 				'schemaCachingDuration'=>3600,
 		),
+=======
+>>>>>>> 8fe685b188bed6bd951690014f315970955d393e
 		'cache'=>array(
 				'class'=>'system.caching.CFileCache',
 				//			'cacheTableName'=>'ls_cache'

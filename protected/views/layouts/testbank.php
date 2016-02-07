@@ -14,7 +14,11 @@
 		<div class="row" style="margin-top:70px;opacity:0.9;">
 			<div class="col-md-4">
 				<h1>
+<<<<<<< HEAD
 					<img src="/public/image/testbank/logo.png" />
+=======
+					<img src="/public/image/gaokao/logo.png" />
+>>>>>>> 8fe685b188bed6bd951690014f315970955d393e
 					<span class="small">
 						<?php if($this->action->id == 'year') echo $_GET['id']; ?>
 						<?php if($this->action->id == 'province') echo Region::model()->getRegion(intval($_GET['id'])); ?>

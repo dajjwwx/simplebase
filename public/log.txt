@@ -1,6 +1,14 @@
+<<<<<<< .mine
 [Datetime]16-01-11 10:56:00	[File]/home/wwwroot/www.simplebase.com/protected/vendor/Util/UtilHelper.php(363)
+=======
+[Datetime]16-01-21 02:27:44	[File]/home/wwwroot/www.simplebase.com/protected/vendor/Util/UtilHelper.php(363)
+>>>>>>> .theirs
 Array
 (
+<<<<<<< .mine
     [pid] => 4
+=======
+    [pid] => 2
+>>>>>>> .theirs
 )
 
